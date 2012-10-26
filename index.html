@@ -33,7 +33,11 @@ $(document).ready(function () {
       L.marker([closest.lat, closest.lon])
         .addTo(map)
         .bindPopup(closest.name)
-        .openPopup()    },
+        .openPopup()   
+      L.marker([pos.coords.latitude, pos.coords.longitude])
+        .addTo(map)
+        .setOpacity(0.5);
+        },
       function() {$("#map").html("<h1>Can not determine your position</h1>") 
       })
     
