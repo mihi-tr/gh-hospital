@@ -1,0 +1,46 @@
+<html><head>
+<script src="jquery-1.8.2.min.js"></script>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
+<script src="underscore-min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0,
+maximum-scale=1.0, user-scalable=no" />
+<style>
+#map {
+  width: 100%;
+  height: 100%;
+  }
+</style>  
+</head>
+<body>
+<script>
+$(document).ready(function () {
+  $.getJSON("ghana_Health_care.json", function(data) {
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      distances=_.map(data,function(d) {
+        var lod=pos.coords.longitude-parseFloat(d.lon);
+        var lad=pos.coords.latitude-parseFloat(d.lat);
+        return Math.sqrt(lod*lod+lad*lad)
+        })
+      md=_.min(distances);
+      closest=data[distances.indexOf(md)]
+      console.log(closest)
+      var map=L.map('map')
+        .setView([pos.coords.latitude, pos.coords.longitude],14);
+      L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
+      {
+          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>' }).addTo(map);
+      L.marker([closest.lat, closest.lon])
+        .addTo(map)
+        .bindPopup(closest.name)
+        .openPopup()    },
+      function() {$("#map").html("<h1>Can not determine your position</h1>") 
+      })
+    
+    })
+  })
+</script> 
+<div id="map">
+</div>
+</body>
+</html>
