@@ -32,7 +32,7 @@ $(document).ready(function () {
       console.log(closest)
       var map=L.map('map')
         .setView([pos.coords.latitude, pos.coords.longitude],14);
-      L.tileLayer('http://{s}.tile.cloudmade.com/b9b22ba09ad44e178b990843a4e99fe8/997/256/{z}/{x}/{y}.png',
+      L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png',
       {
           attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>' }).addTo(map);
       L.marker([closest.lat, closest.lon])
