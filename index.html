@@ -32,7 +32,7 @@ $(document).ready(function () {
       console.log(closest)
       var map=L.map('map')
         .setView([pos.coords.latitude, pos.coords.longitude],14);
-      L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png',
+      L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg',
       {
           attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © MapQuest' }).addTo(map);
       L.marker([closest.lat, closest.lon])
